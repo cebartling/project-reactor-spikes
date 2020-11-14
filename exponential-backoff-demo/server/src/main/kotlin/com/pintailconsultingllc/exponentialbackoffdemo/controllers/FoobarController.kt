@@ -22,7 +22,7 @@ class FoobarController(
     fun getById(@PathVariable id: Long): Mono<FoobarDTO?>? {
         return Mono.fromCallable {
             val optional = foobarService.getById(id)
-            if (optional.isPresent)     {
+            if (optional.isPresent) {
                 optional.get().toDTO()
             } else {
                 null
@@ -32,8 +32,9 @@ class FoobarController(
 
     @GetMapping
     fun getPage(pageable: Pageable): Mono<Page<FoobarDTO?>> {
-        return Mono.fromCallable { foobarService.retrieve(pageable).map { foobar: Foobar? -> foobar?.toDTO() } }
-                .subscribeOn(Schedulers.elastic())
+        return Mono.fromCallable {
+            foobarService.retrieve(pageable).map { foobar: Foobar? -> foobar?.toDTO() }
+        }.subscribeOn(Schedulers.elastic())
     }
 
     @PostMapping
