@@ -5,6 +5,7 @@ import com.pintailconsultingllc.exponentialbackoffdemo.repositories.FoobarReposi
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 import java.util.*
 
 @Service
@@ -16,6 +17,10 @@ class FoobarService(
     }
 
     fun save(foobar: Foobar): Foobar {
+        if (foobar.id == null) {
+            foobar.createdAt = LocalDateTime.now()
+        }
+        foobar.updatedAt = LocalDateTime.now()
         return foobarRepository.save(foobar)
     }
 
