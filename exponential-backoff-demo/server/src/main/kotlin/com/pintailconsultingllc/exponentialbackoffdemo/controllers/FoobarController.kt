@@ -67,4 +67,3 @@ class FoobarController(
         }.subscribeOn(Schedulers.elastic())
     }
 }
-
