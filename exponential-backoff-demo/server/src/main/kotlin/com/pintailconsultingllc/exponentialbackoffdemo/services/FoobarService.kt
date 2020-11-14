@@ -5,16 +5,17 @@ import com.pintailconsultingllc.exponentialbackoffdemo.repositories.FoobarReposi
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class FoobarService(
         private val foobarRepository: FoobarRepository
 ) {
-    fun retrieve(pageable: Pageable) : Page<Foobar> {
+    fun retrieve(pageable: Pageable): Page<Foobar> {
         return foobarRepository.findAll(pageable)
     }
 
-    fun save(foobar: Foobar) : Foobar {
+    fun save(foobar: Foobar): Foobar {
         return foobarRepository.save(foobar)
     }
 
@@ -22,7 +23,7 @@ class FoobarService(
         return foobarRepository.delete(foobar)
     }
 
-    fun getById(id: Long): Foobar {
-        return foobarRepository.getOne(id)
+    fun getById(id: Long): Optional<Foobar> {
+        return foobarRepository.findById(id)
     }
 }
